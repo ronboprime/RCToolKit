@@ -1,4 +1,5 @@
 import bpy
+
 bl_info = {
     "name": "RCToolKit",
     "description": "Starting Toolkit, featuring custom node groups, with minor UI Inclusion",
@@ -13,7 +14,6 @@ bl_info = {
     "support": "COMMUNITY",
     "category": "Node",
 }
-
 
 class NODE_OT_FinTouOperator(bpy.types.Operator):
     """Utilizing the String Property, FNode , set by UI operator, to call node group, then a slight transform"""
