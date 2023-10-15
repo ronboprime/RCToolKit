@@ -2,6 +2,6 @@
 
 # Ronbo's Creative ToolKit
 
-a growing collection of node groups for geometry nodes, in blender 3.6.4 and up.
+a growing collection of node groups for geometry nodes, in blender 3.6.4. 
 
-full file includes user interface elements, and image assets.
+still hammering out installation... almost gots it!
