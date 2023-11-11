@@ -1,4 +1,64 @@
 import bpy
+
+class NODE_OT_add_node(bpy.types.Operator):
+    bl_idname = "node.add_node"
+    bl_label = "Add Node"
+    
+    # Property to hold the name of the node to add
+    node_name: bpy.props.StringProperty()
+
+    @classmethod
+    def poll(cls, context):
+        return context.space_data.tree_type == 'GeometryNodeTree'
+
+    def execute(self, context):
+        # Get the active node tree
+        node_tree = context.space_data.node_tree
+
+        # Create a new node
+        new_node = node_tree.nodes.new(type=self.node_name)
+
+        # Position the new node
+        new_node.location = (0, 0)
+
+        return {'FINISHED'}
+
+class NODE_PT_my_panel(bpy.types.Panel):
+    bl_label = "Node Groups"
+    bl_space_type = 'NODE_EDITOR'
+    bl_region_type = 'UI'
+    bl_category = "Tool"
+
+    def draw(self, context):
+        layout = self.layout
+
+        # Iterate over node groups
+        for ng in bpy.data.node_groups:
+            # Iterate over nodes in the group
+            #for node in ng.nodes:
+                # Create a button for the node
+            op = layout.operator("node.add_node", text=ng.name)
+                
+                # Set the operator's node_name property
+            op.node_name = ng.name
+            print(ng)
+                
+classes=[NODE_PT_my_panel, NODE_OT_add_node]
+
+def register():
+    for cls in classes:
+        bpy.utils.register_class(cls)
+
+def unregister():
+    for cls in classes:
+        bpy.utils.unregister_class(cls)
+        
+
+register()
+
+
+"""old shit
+import bpy
 bl_info = {
     "name": "RCToolKit",
     "description": "Starting Toolkit, featuring custom node groups, with minor UI Inclusion",
@@ -87,3 +147,4 @@ def unregister():
     print("Goodbye, cruel world!")    
 
 register()
+"""
